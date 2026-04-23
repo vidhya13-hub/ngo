@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SevaSync</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet/dist/leaflet.css"
+  />
+</head>
+<body>
+  <div id="loginPage" class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="login-logo">
+          <i class="fa-solid fa-right-to-bracket"></i>
+        </div>
+        <h1>SevaSync</h1>
+        <p>Smart Resource Allocation System</p>
+      </div>
+
+      <form id="loginForm" class="login-form">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="Enter your name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="Enter your email" required />
+        </div>
+
+        <button type="submit" class="gradient-btn">Sign In</button>
+      </form>
+
+      <p class="login-footer">Connecting communities with compassion</p>
+    </div>
+  </div>
+
+  <div id="appPage" class="hidden">
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-left">
+          <div class="logo-box">S</div>
+          <h1>SevaSync</h1>
+        </div>
+
+        <div class="nav-right">
+          <div class="user-box">
+            <i class="fa-solid fa-user"></i>
+            <span id="navUserName">User</span>
+          </div>
+          <button class="menu-btn">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="app-main">
+      <section class="hero-banner">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <span class="hero-badge">
+            <i class="fa-solid fa-heart"></i>
+            Smart NGO Coordination
+          </span>
+          <h2>Connecting the right help to the right need — at the right time.</h2>
+          <p>
+            A smarter way to track community needs, register volunteers, and match support where it matters most.
+          </p>
+        </div>
+      </section>
+
+      <section class="analytics-grid">
+        <div class="analytics-card emerald">
+          <div class="analytics-top">
+            <i class="fa-solid fa-circle-exclamation big-icon"></i>
+            <i class="fa-solid fa-arrow-trend-up small-icon"></i>
+          </div>
+          <div class="analytics-number" id="totalNeedsCard">0</div>
+          <div class="analytics-label">Total Community Needs</div>
+        </div>
+
+        <div class="analytics-card blue">
+          <div class="analytics-top">
+            <i class="fa-solid fa-users big-icon"></i>
+            <i class="fa-solid fa-arrow-trend-up small-icon"></i>
+          </div>
+          <div class="analytics-number" id="totalVolunteersCard">0</div>
+          <div class="analytics-label">Registered Volunteers</div>
+        </div>
+
+        <div class="analytics-card orange">
+          <div class="analytics-top">
+            <i class="fa-solid fa-chart-line big-icon"></i>
+            <span class="high-badge">HIGH</span>
+          </div>
+          <div class="analytics-title" id="topNeedCard">No needs yet</div>
+          <div class="analytics-label">Most Urgent Need</div>
+        </div>
+      </section>
+
+      <section class="forms-grid">
+        <div class="card">
+          <div class="card-header">
+            <i class="fa-solid fa-circle-exclamation header-icon emerald-text"></i>
+            <h2>Add Community Need</h2>
+          </div>
+
+          <form id="needForm" class="form">
+            <div class="form-group">
+              <label for="description">Need Description</label>
+              <input
+                type="text"
+                id="description"
+                placeholder="E.g., Food distribution for 50 families"
+                required
+              />
+            </div>
+
+            <div class="grid-2">
+              <div class="form-group">
+                <label for="location">Location</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-location-dot input-icon"></i>
+                  <input
+                    type="text"
+                    id="location"
+                    placeholder="Area/District or City"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="urgency">Urgency Level</label>
+                <select id="urgency">
+                  <option value="low">Low</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" class="submit-btn emerald-btn">
+              <i class="fa-solid fa-plus"></i>
+              <span>Add Need</span>
+            </button>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <i class="fa-solid fa-user-plus header-icon blue-text"></i>
+            <h2>Register Volunteer</h2>
+          </div>
+
+          <form id="volunteerForm" class="form">
+            <div class="form-group">
+              <label for="volName">Volunteer Name</label>
+              <input
+                type="text"
+                id="volName"
+                placeholder="Enter volunteer name"
+                required
+              />
+            </div>
+
+            <div class="grid-2">
+              <div class="form-group">
+                <label for="volSkill">Skill/Expertise</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-award input-icon"></i>
+                  <input
+                    type="text"
+                    id="volSkill"
+                    placeholder="E.g., Medical, Teaching, Food Distribution"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="volLocation">Location</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-location-dot input-icon"></i>
+                  <input
+                    type="text"
+                    id="volLocation"
+                    placeholder="Area/District or City"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="submit-btn blue-btn">
+              <i class="fa-solid fa-user-plus"></i>
+              <span>Register Volunteer</span>
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <section id="matchSection" class="match-section hidden">
+        <div class="match-header">
+          <i class="fa-solid fa-circle-check emerald-text"></i>
+          <h2>Matching Results</h2>
+        </div>
+        <div id="matchList" class="match-list"></div>
+      </section>
+
+      <section class="lower-grid">
+        <div class="card">
+          <div class="card-header">
+            <i class="fa-solid fa-chart-column header-icon emerald-text"></i>
+            <h2>Need Categories Distribution</h2>
+          </div>
+          <div id="chartBars" class="chart-bars"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <i class="fa-solid fa-map-location-dot header-icon blue-text"></i>
+            <h2>Location Map</h2>
+          </div>
+
+          <div id="map" class="map-area"></div>
+          <p id="mapStatus" class="map-status">Map ready</p>
+
+          <div id="locationsList" class="locations-list"></div>
+        </div>
+      </section>
+    </main>
+
+    <button class="chat-toggle" onclick="toggleChat()">
+      <i class="fa-solid fa-comment-dots"></i>
+    </button>
+
+    <div id="chatbot" class="chatbot hidden">
+      <div class="chat-header-bar">
+        <div class="chat-title">
+          <i class="fa-solid fa-robot"></i>
+          <span>SevaSync AI Assistant</span>
+        </div>
+        <button class="chat-close" onclick="toggleChat()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div id="chatMessages" class="chat-messages"></div>
+
+      <div class="chat-input-bar">
+        <input
+          type="text"
+          id="chatInput"
+          placeholder="Ask about volunteers, needs, or matches..."
+          onkeypress="handleKeyPress(event)"
+        />
+        <button onclick="sendMessage()">
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
